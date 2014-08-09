@@ -12,5 +12,5 @@ group :integration do
   gem 'test-kitchen'
   gem 'kitchen-docker'
   gem 'serverspec'
+  gem 'docker'
 end
-gem 'docker'

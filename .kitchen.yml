@@ -1,16 +1,19 @@
 ---
 driver:
   name: docker
+  # socket: tcp://192.168.59.103:2375 # local
 
 provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: centos6
+    driver_config:
+      image: centos:centos6
+      platform: centos
 
 suites:
-  - name: default
+  - name: server
     run_list:
-      - recipe[zabbix-jp::default]
+      - recipe[zabbix-jp::server]
     attributes:
