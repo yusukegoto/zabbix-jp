@@ -66,3 +66,6 @@ template '/etc/zabbix/zabbix_server.conf' do
 end
 
 template '/etc/zabbix/web/zabbix.conf.php'
+
+include_recipe 'zabbix-jp::init_server'
+

@@ -1,0 +1,33 @@
+<?php
+  require __DIR__.'/PhpZabbixApi_Library/ZabbixApiAbstract.class.php';
+  require __DIR__.'/PhpZabbixApi_Library/ZabbixApi.class.php';
+
+  try {
+
+      // connect to Zabbix API
+      $api = new ZabbixApi('http://127.0.0.1/zabbix/api_jsonrpc.php', 'Admin', 'zabbix');
+      $api->setDefaultParams(array(
+        'output' => 'extend'
+      ));
+
+      $users = $api->userGet(array(
+        'search' => array(
+          'alias' => 'Admin'
+        )
+      ));
+
+      foreach($users as $user)
+      {
+        $userid = $user->userid;
+
+        $res = $api->userUpdate(array(
+          'userid' => $userid,
+          'lang'   => 'ja_JP'
+        ));
+      }
+
+  } catch(Exception $e) {
+      // Exception in ZabbixApi catched
+      echo $e->getMessage();
+  }
+?>
