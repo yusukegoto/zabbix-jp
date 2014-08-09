@@ -1,12 +1,13 @@
 ---
 driver:
   name: vagrant
+  network:
+    - ["private_network", {ip: "192.168.33.33"}]
 
 provisioner:
   name: chef_solo
 
 platforms:
-  # - name: ubuntu-12.04
   - name: centos-6.4
 
 suites:
