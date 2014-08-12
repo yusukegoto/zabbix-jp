@@ -13,5 +13,6 @@ platforms:
 suites:
   - name: server
     run_list:
+      - recipe[zabbix-jp::postgresql]
       - recipe[zabbix-jp::server]
     attributes:
