@@ -9,16 +9,6 @@ include_recipe 'zabbix-jp::default'
   package pkg
 end
 
-%W{
-  httpd
-  zabbix-server
-}.each do |svc|
-  service svc do
-    supports restart: true, status: true, reload: true
-    action   [:enable, :start]
-  end
-end
-
 template '/etc/php.ini' do
   notifies :restart, 'service[httpd]'
 end
@@ -28,6 +18,16 @@ template '/etc/zabbix/zabbix_server.conf' do
 end
 
 template '/etc/zabbix/web/zabbix.conf.php'
+
+%W{
+  httpd
+  zabbix-server
+}.each do |svc|
+  service svc do
+    supports restart: true, status: true, reload: true
+    action   [:enable, :start]
+  end
+end
 
 include_recipe 'zabbix-jp::init_server'
 
