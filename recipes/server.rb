@@ -13,6 +13,11 @@ template '/etc/php.ini' do
   notifies :restart, 'service[httpd]'
 end
 
+template '/etc/httpd/conf.d/zabbix.conf' do
+  source 'zabbix.httpd.conf.erb'
+  notifies :restart, 'service[httpd]'
+end
+
 template '/etc/zabbix/zabbix_server.conf' do
   notifies :restart, 'service[zabbix-server]'
 end

@@ -1,14 +1,30 @@
 ---
-driver:
-  name: vagrant
-  network:
-    - ["private_network", {ip: "192.168.33.33"}]
-
 provisioner:
   name: chef_solo
 
 platforms:
   - name: centos-6.4
+    driver:
+      name: vagrant
+      network:
+        - ["private_network", {ip: "192.168.33.33"}]
+  # - name: amazon-linux
+  #   driver:
+  #     name: ec2
+  #     aws_access_key_id: <%= ENV['aws_access_key_id']  %>
+  #     aws_secret_access_key: <%= ENV['aws_secret_access_key']  %>
+  #     aws_ssh_key_id: <%= ENV['aws_ssh_key_id']  %>
+  #     ssh_key: <%= ENV['ssh_key']  %>
+  #     region:  <%= ENV['region']  %>
+  #     availability_zone: <%= ENV['availability_zone']  %>
+  #     image_id: <%= ENV['image_id'] %>
+  #     username: ec2-user
+  #     require_chef_omnibus: true
+  #     flavor_id: 't2.small'
+  #     subnet_id: <%= ENV['subnet_id'] %>
+  #     security_group_ids: ['<%= ENV['security_group_id'] %>']
+  #     device_index: 0
+  #     associate_public_ip: true
 
 suites:
   - name: server

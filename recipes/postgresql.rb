@@ -8,7 +8,13 @@ include_recipe 'zabbix-jp::default'
   package pkg
 end
 
-pg_base = '/var/lib/pgsql/data'
+pg_base = case node.platform
+          when 'amazon'
+            '/var/lib/pgsql9/data'
+          else
+            '/var/lib/pgsql/data'
+          end
+
 initdb_cmd = <<-PG
   cd #{ pg_base };
   initdb --locale=ja_JP.UTF-8 .
