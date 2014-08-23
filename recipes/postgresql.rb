@@ -29,12 +29,6 @@ execute initdb_cmd do
   action :run
 end
 
-service 'postgresql' do
-  supports restart: true, status: true, reload: true
-  action   [:enable, :start]
-  notifies :run, 'execute[zabbix_db_init]'
-end
-
 zabbix_db_init_cmd = <<-ZABBIXDB
   cd /usr/share/doc/zabbix-server-pgsql-2.2.5/create
   cat schema.sql images.sql data.sql | psql -U #{ db_user }
@@ -46,4 +40,10 @@ execute 'zabbix_db_init' do
   user  db_user
   group db_user
   action :nothing
+end
+
+service 'postgresql' do
+  supports restart: true, status: true, reload: true
+  action   [:enable, :start]
+  notifies :run, 'execute[zabbix_db_init]'
 end

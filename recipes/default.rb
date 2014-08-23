@@ -21,11 +21,11 @@ end
 
 package 'zabbix-agent'
 
+template '/etc/zabbix/zabbix_agentd.conf' do
+  notifies :restart, 'service[zabbix-agent]'
+end
+
 service 'zabbix-agent' do
   supports restart: true, status: true, reload: true
   action   [:enable, :start]
-end
-
-template '/etc/zabbix/zabbix_agentd.conf' do
-  notifies :restart, 'service[zabbix-agent]'
 end
