@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'chef'
-gem 'berkshelf'
+gem 'rake'
 
 group :test do
   gem 'rubocop'
